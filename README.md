@@ -9,6 +9,7 @@ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/status
 
 To upload image to S3 execute the following commands:
 
+<code>
 homer1="$(base64 -i `pwd`/chalicelib/Homer_artwork.png)"
 
 curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer1)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img
@@ -17,3 +18,4 @@ curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 1
 homer2="$(base64 -i `pwd`/chalicelib/homer_doh.jpg)"
 
 curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer2)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img
+</code>
