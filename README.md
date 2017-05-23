@@ -26,7 +26,7 @@ chalice deploy<br>
 <h2> Service Methods</h2>
 1. --------------------------------------------------------------------------<br>
 To get server status execute the following command:<br>
-http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/status<br>
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/status<br>
 Note: to use http command install httpie, which is part of requirements.txt<br>
 AWS Gateway routs /status endpoint to status() function. Function collects system timestamp, os/platform data and returns it as dictionary.<br><br>
 2. ---------------------------------------------------------------------------<br>
