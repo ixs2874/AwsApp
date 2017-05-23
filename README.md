@@ -43,4 +43,7 @@ base64 command encodes an image into stream and assigns it variable "homerX".<br
 curl posts "homerX" image to "post/img" endpoint on AWS Lambda service and returns URL of the image on S3.<br>
 Chalice server forwards post/img Post request to post_image() function, reads json payload, decodes image, uses ImageMagick convert command and pubprocess.Popen function to creat thumbnail img, then thumbnail is uploaded to S3 ixs2874 bucket and URL is returned.<br>
 </p>
+3. --------------------------------------------------------------------------<br>
+Get Currency rates:
+
 
