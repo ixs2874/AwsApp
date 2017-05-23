@@ -14,7 +14,9 @@ mkdir test<br>
 cd test<br>
 git clone https://github.com/ixs2874/AwsApp <br>
 mkdir ~/.aws<br>
-mv ./config ~/.aws/<br>
+vim ~/.aws/config<br>
+Add AWS Secret ID and Key to config. Look in the 'config' file in this repo for example. <br>
+The keys in the file are not valid.  Get your own: <a href="http://docs.aws.amazon.com/toolkit-for-eclipse/v1/user-guide/setup-credentials.html"> how to get AWS Access Key </a><br>
 python -m venv venv<br>
 source ./venv/bin/activate<br>
 pip install -r requirements.txt<br>
@@ -41,4 +43,7 @@ base64 command encodes an image into stream and assigns it variable "homerX".<br
 curl posts "homerX" image to "post/img" endpoint on AWS Lambda service and returns URL of the image on S3.<br>
 Chalice server forwards post/img Post request to post_image() function, reads json payload, decodes image, uses ImageMagick convert command and pubprocess.Popen function to creat thumbnail img, then thumbnail is uploaded to S3 ixs2874 bucket and URL is returned.<br>
 </p>
+3. --------------------------------------------------------------------------<br>
+Get Currency rates:
+
 
