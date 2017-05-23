@@ -48,7 +48,8 @@ curl posts "homerX" image to "post/img" endpoint on AWS Lambda service and retur
 Chalice server forwards post/img Post request to post_image() function, reads json payload, decodes image, uses ImageMagick "convert" command and pubprocess.Popen function to create thumbnail img, then thumbnail is uploaded to S3 bucket and URL is returned.<br>
 </p>
 3. --------------------------------------------------------------------------<br>
-The following endpoints use Fixer.io APIs for currency conversion. These are free JSON API for current and historical foreign exchange rates.
+Fixer.io are free JSON API for current and historical foreign exchange rates. <br>
+The following endpoints use these APIs for currency converter [rates/convert/<currency label>/to/<currency label>/amount/<amount to convert>] <br>
 
 Get all currency rates:<br>
 $ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates <br><br>
@@ -57,7 +58,7 @@ $ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/usd <br>
 or for Canada currency: <br>
 $ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/cad <br><br>
 To convert USD to CAD: <br>
-$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/convert/usd/to/cad/ammount/85.50
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/convert/usd/to/cad/amount/85.50
 
 
 
