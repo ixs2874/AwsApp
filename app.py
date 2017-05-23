@@ -18,14 +18,21 @@ app.debug = True
 
 OBJ = {}
 S3 = boto3.client('s3', region_name='us-east-1')
-BUCKET = 'ixs2874'
+BUCKET = {'bucket': 'ixs2874'}
+
 
 @app.route('/set/bucket/{bucket}', methods=['GET'])
 def set_bucket(bucket):
-    BUCKET = str(bucket)
-    return {
-        'BUCKET': BUCKET
-    }
+
+    BUCKET['bucket'] = str(bucket)
+    return BUCKET
+
+
+@app.route('/get/bucket', methods=['GET'])
+def get_bucket():
+
+    return BUCKET
+
 
 @app.route('/status')
 def status():
@@ -82,14 +89,14 @@ def post_image():
 
     filename = 'talon/homer_{}_{}x{}.{}'.format(uuid.uuid4(), width, height, img_format)
     S3.put_object(
-            Bucket=BUCKET,
+            Bucket=BUCKET['bucket'],
             Key=filename,
             Body=thumbnail,
             ACL='public-read',
             ContentType='image/{}'.format(img_format),
     )
     return {
-        'image url': 'https://s3.amazonaws.com/{}/{}'.format(BUCKET, filename)
+        'image url': 'https://s3.amazonaws.com/{}/{}'.format(BUCKET['bucket'], filename)
     }
 
 
@@ -112,6 +119,7 @@ def get_forex_rates(base):
     """Fixer.io is a free JSON API for current and historical foreign exchange rates.
        It relies on daily feeds published by the European Central Bank.
 
+    :type base: str
     :param base: base currency
     :return: dictionary of major currencies with rates to base currency.
     """
@@ -119,10 +127,11 @@ def get_forex_rates(base):
     url = 'http://api.fixer.io/latest?base={}'.format(base.upper())
     try:
         response = requests.get(url)
-        if response.status_code != 200:
-            response = 'None'
+        stat = response.status_code
+        if stat != 200:
+
             return {
-                'Public API Access Error': 'api.fixer.io get request returned status: {}'.format(response.status_code)
+                'Public API Access Error': 'api.fixer.io get request returned status: {}'.format(stat)
             }
         else:
             rates = response.json()['rates']
@@ -134,13 +143,13 @@ def get_forex_rates(base):
         raise BadRequestError('Public APIs Connection Error > {}'.format(err))
 
 
-@app.route('/rates/convert/{fromm}/to/{to}/ammount/{ammount}', methods=['GET'])
-def forex_convert(from_x, to_x, ammount):
+@app.route('/rates/convert/{fromm}/to/{to}/amount/{amount}', methods=['GET'])
+def forex_convert(from_x, to_x, amount):
     """Converts currencies
 
     :param from_x: from currency label
     :param to_x: to currency label
-    :param ammount: amount to convert
+    :param amount: amount to convert
     :return: converted amount
     """
 
@@ -154,9 +163,10 @@ def forex_convert(from_x, to_x, ammount):
         else:
             fr = response.json()['rates'][from_x.upper()]
             to = response.json()['rates'][to_x.upper()]
-            result = float(to) / float(fr) * float(ammount)
+            result = float(to) / float(fr) * float(amount)
+            from_key = 'from {} {} at {} per EUR'.format(amount, from_x.upper(), fr)
             return {
-                'from {} {} at {} per EUR'.format(ammount, from_x.upper(), fr): 'to {} at {} per EUR'.format(to_x.upper(), to),
+                from_key: 'to {} at {} per EUR'.format(to_x.upper(), to),
                 'result': '{} {}'.format(float("{0:.2f}".format(result)), to_x.upper())
             }
     except requests.ConnectionError as err:
