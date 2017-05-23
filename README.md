@@ -14,8 +14,9 @@ mkdir test<br>
 cd test<br>
 git clone https://github.com/ixs2874/AwsApp <br>
 mkdir ~/.aws<br>
-vim ~/.aws/config  to add AWS Secret ID and Key. 
-Note: Look in 'config' file for example of entries. The key in the file is not valid.  <a href="http://docs.aws.amazon.com/toolkit-for-eclipse/v1/user-guide/setup-credentials.html"> Get AWS Access Key </a><br>
+vim ~/.aws/config<br>
+Add AWS Secret ID and Key to config. Look in the 'config' file in this repo for example. <br>
+The keys in the file are not valid.  Get your own: <a href="http://docs.aws.amazon.com/toolkit-for-eclipse/v1/user-guide/setup-credentials.html"> how to get AWS Access Key </a><br>
 python -m venv venv<br>
 source ./venv/bin/activate<br>
 pip install -r requirements.txt<br>
