@@ -48,7 +48,7 @@ AWS Gateway routs /status endpoint to status() function. Function collects syste
 2. ---------------------------------------------------------------------------<br>
 This package contains 2 sample images under /chalicelib directory to be uploaded at S3 AWS storage.<br> 
 Default S3 bucket name is 'ixs2874'. To set a different bucket name:<br>
-$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/set/bucket/<your bucket name> <br>
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/set/bucket/{your bucket name} <br>
 To verify: <br>
 $ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/get/bucket<br><br>
 Steps to upload images to S3 execute the following commands in linux CLI:<br>
