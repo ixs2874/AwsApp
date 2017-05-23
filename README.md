@@ -32,16 +32,15 @@ AWS Gateway routs /status endpoint to status() function. Function collects syste
 2. ---------------------------------------------------------------------------<br>
 This package contains 2 sample images under /chalicelib directory to be uploaded at S3 AWS storage.<br> 
 Default S3 bucket name is 'ixs2874'. To set a different bucket name:<br>
-http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/set/bucket/<your bucket name> <br>
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/set/bucket/<your bucket name> <br>
 To verify: <br>
-http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/get/bucket
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/get/bucket<br><br>
+Steps to upload images to S3 execute the following commands in linux CLI:<br>
+$ homer1="$(base64 -i `pwd`/chalicelib/Homer_artwork.png)"<br><br>
+$ curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer1)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
 
-Steps to upload images to S3 execute the following commands:<br>
-homer1="$(base64 -i `pwd`/chalicelib/Homer_artwork.png)"<br><br>
-curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer1)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
-
-homer2="$(base64 -i `pwd`/chalicelib/homer_doh.jpg)"<br>
-curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "jpg", "data": "'"$(echo $homer2)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
+$ homer2="$(base64 -i `pwd`/chalicelib/homer_doh.jpg)"<br>
+$ curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "jpg", "data": "'"$(echo $homer2)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
 <h4>Description of image upload</h4>
 <p>
 base64 command encodes an image into stream and assigns it variable "homerX".<br>
@@ -52,13 +51,13 @@ Chalice server forwards post/img Post request to post_image() function, reads js
 The following endpoints use Fixer.io APIs for currency conversion. These are free JSON API for current and historical foreign exchange rates.
 
 Get all currency rates:<br>
-http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates <br><br>
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates <br><br>
 Get all currency rates with specified base currency: e.g., USD <br>
-http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/usd <br>
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/usd <br>
 or for Canada currency: <br>
-http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/cad <br><br>
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/cad <br><br>
 To convert USD to CAD: <br>
-http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/convert/usd/to/cad/ammount/85.50
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/convert/usd/to/cad/ammount/85.50
 
 
 
