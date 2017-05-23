@@ -25,10 +25,14 @@ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/status
 
 2. This project contains 2 sample images under /chalicelib that could be uploaded to S3 AWS storage.<br> 
 Steps to upload images to S3 execute the following commands:<br>
-<code>
+
 homer1="$(base64 -i `pwd`/chalicelib/Homer_artwork.png)"<br>
-curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer1)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
+curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer1)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br><br>
 
 homer2="$(base64 -i `pwd`/chalicelib/homer_doh.jpg)"<br>
-curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer2)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br>
-</code>
+curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer2)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
+
+base64 command encodes an image into stream and assigns it variable "homerX".<br>
+curl posts "homerX" image to "post/img" endpoint on AWS Lambda service and returns URL of the image on S3.<br>
+Chalice server forwards post/img Post request to post_image() function, reads json payload, decodes image, uses ImageMagick convert command and pubprocess.Popen function to creat thumbnail img, then thumbnail is uploaded to S3 ixs2874 bucket and URL is returned.<br>
+
