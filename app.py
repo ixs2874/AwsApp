@@ -9,6 +9,7 @@ publishing service with 3 functions:service should do three things:
 import boto3
 import base64
 import logging
+import requests
 from chalice import (Chalice, NotFoundError, BadRequestError)
 
 app = Chalice(app_name='talon')
@@ -19,6 +20,12 @@ OBJ = {}
 S3 = boto3.client('s3', region_name='us-east-1')
 BUCKET = 'ixs2874'
 
+@app.route('/set/bucket/{bucket}', methods=['GET'])
+def set_bucket(bucket):
+    BUCKET = str(bucket)
+    return {
+        'BUCKET': BUCKET
+    }
 
 @app.route('/status')
 def status():
@@ -93,6 +100,67 @@ def index():
     :return: Returns status
     """
     return status()
+
+
+@app.route('/rates', methods=['GET'])
+def get_eur_rates():
+    return get_forex_rates('EUR')
+
+
+@app.route('/rates/{base}', methods=['GET'])
+def get_forex_rates(base):
+    """Fixer.io is a free JSON API for current and historical foreign exchange rates.
+       It relies on daily feeds published by the European Central Bank.
+
+    :param base: base currency
+    :return: dictionary of major currencies with rates to base currency.
+    """
+
+    url = 'http://api.fixer.io/latest?base={}'.format(base.upper())
+    try:
+        response = requests.get(url)
+        if response.status_code != 200:
+            response = 'None'
+            return {
+                'Public API Access Error': 'api.fixer.io get request returned status: {}'.format(response.status_code)
+            }
+        else:
+            rates = response.json()['rates']
+            return {
+                'base currency': base,
+                'rates': rates
+            }
+    except requests.ConnectionError as err:
+        raise BadRequestError('Public APIs Connection Error > {}'.format(err))
+
+
+@app.route('/rates/convert/{fromm}/to/{to}/ammount/{ammount}', methods=['GET'])
+def forex_convert(from_x, to_x, ammount):
+    """Converts currencies
+
+    :param from_x: from currency label
+    :param to_x: to currency label
+    :param ammount: amount to convert
+    :return: converted amount
+    """
+
+    url = 'http://api.fixer.io/latest'
+    try:
+        response = requests.get(url)
+        if response.status_code != 200:
+            return {
+                'API Access Error': 'api.fixer.io get request returned with status: {}'.format(response.status_code)
+            }
+        else:
+            fr = response.json()['rates'][from_x.upper()]
+            to = response.json()['rates'][to_x.upper()]
+            result = float(to) / float(fr) * float(ammount)
+            return {
+                'from {} {} at {} per EUR'.format(ammount, from_x.upper(), fr): 'to {} at {} per EUR'.format(to_x.upper(), to),
+                'result': '{} {}'.format(float("{0:.2f}".format(result)), to_x.upper())
+            }
+    except requests.ConnectionError as err:
+        raise BadRequestError('Public APIs Connection Error > {}'.format(err))
 
 
 @app.route('/objects/{key}', methods=['GET', 'PUT'])
