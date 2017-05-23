@@ -21,7 +21,7 @@ python -m venv venv<br>
 source ./venv/bin/activate<br>
 pip install -r requirements.txt<br>
 chalice deploy<br>
-To allow public access to the images add the following code to your s3 bucket "Bucket Policy" under "Permissions" tab. <br>
+To allow public access to the images add the following code to your s3 bucket "Bucket Policy" under "Permissions" tab: <br><br>
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -32,7 +32,7 @@ To allow public access to the images add the following code to your s3 bucket "B
                 "s3:PutObject",
                 "s3:PutObjectAcl"
             ],
-            "Resource": "arn:aws:s3:::(YOUR S3 BUCKET NAME)/*"
+            "Resource": "arn:aws:s3:::YOUR S3 BUCKET NAME HERE/*"
         }
     ]
 }
