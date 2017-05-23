@@ -2,6 +2,24 @@
 <h2>Basic Publishing Service</h2>
 This code uses Chalice serverless microframework to build a simple publishing service. 
 
+<h3> System requirements </h3>
+<p> 
+1. Python 3.6  (python -V)
+2. git 3.8 (git --version)
+3. pip 9 (pip --version)
+</p>
+<h3> Setup steps in linux environment </h3>
+<p>
+git clone https://github.com/ixs2874/AwsApp
+mkdir ~/.aws
+mv ./config ~/.aws/
+python -m venv venv
+. ./venv/bin/activate
+pip install -r requirements.txt
+chalice deploy
+</p>
+
+
 1. To get status execute the following:
 http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/status
 
