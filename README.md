@@ -21,6 +21,21 @@ python -m venv venv<br>
 source ./venv/bin/activate<br>
 pip install -r requirements.txt<br>
 chalice deploy<br>
+To allow public access to the images add the following code to your s3 bucket "Bucket Policy" under "Permissions" tab. <br>
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": "arn:aws:s3:::(YOUR S3 BUCKET NAME)/*"
+        }
+    ]
+}
 </p>
 
 <h2> Service Methods</h2>
@@ -59,8 +74,5 @@ To convert USD to CAD: <br>
 $ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/convert/usd/to/cad/amount/85.50<br><br>
 You can try any other currency pair from the list.<br>
 $ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates
-
-
-
 
 
