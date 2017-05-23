@@ -21,7 +21,7 @@ python -m venv venv<br>
 source ./venv/bin/activate<br>
 pip install -r requirements.txt<br>
 chalice deploy<br>
-To allow public access to the images add the following code to your s3 bucket "Bucket Policy" under "Permissions" tab: <br><br>
+To allow public access to the images add the following code to your AWS S3 "Bucket Policy" under "Permissions" tab: <br><br>
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -35,7 +35,8 @@ To allow public access to the images add the following code to your s3 bucket "B
             "Resource": "arn:aws:s3:::YOUR S3 BUCKET NAME HERE/*"
         }
     ]
-}
+}<br>
+Note: without adding the above policy S3 upload will fail with a security error. This is because ACL='public-read' parameter in S3.put_object function. If this parameter is removed, no error will be observed, but URL of the image will not be publicly accessible.<br>
 </p>
 
 <h2> Service Methods</h2>
