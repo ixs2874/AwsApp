@@ -2,11 +2,9 @@
 <h2>Basic Publishing Service</h2>
 This code uses Chalice serverless microframework to build a simple publishing service. 
 
-<h3> System requirements </h3>
+<h3> Requirements </h3>
 <p> 
 1. Python 3.6  (python -V)<br>
-2. git 3.8 (git --version)<br>
-3. pip 9 (pip --version)<br>
 </p>
 <h3> Setup steps for Linux RH</h3>
 <p>
