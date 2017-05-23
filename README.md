@@ -66,7 +66,8 @@ Chalice server forwards post/img Post request to post_image() function, reads js
 </p>
 3. --------------------------------------------------------------------------<br>
 Fixer.io is free JSON API for current and historical foreign exchange rates. <br>
-The following endpoints use these APIs for currency rate display and currency conversion: rates/convert/{from currency label}/to/{currency label}/amount/{amount to convert} <br>
+The following endpoints use these APIs for currency rate display and currency conversion. <br>
+Currency conversion endpoint format: rates/convert/{from currency label}/to/{currency label}/amount/{amount to convert} <br><br>
 
 Get all currency rates. Default base currency is EUR:<br>
 $ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates <br><br>
