@@ -57,6 +57,7 @@ $ curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height":
 
 $ homer2="$(base64 -i `pwd`/chalicelib/homer_doh.jpg)"<br>
 $ curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "jpg", "data": "'"$(echo $homer2)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
+curl returns URL of an image in S3. Copy this URL and paste it the browser. A thumbnail image should be displayed. <br> <br>
 <h4>Description of image upload</h4>
 <p>
 base64 command encodes an image into stream and assigns it variable "homerX".<br>
