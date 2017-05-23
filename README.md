@@ -30,8 +30,7 @@ AWS Gateway routs /status endpoint to status() function. Function collects syste
 2. ---------------------------------------------------------------------------<br>
 This package contains 2 sample images under /chalicelib directory to be uploaded at S3 AWS storage.<br> 
 Steps to upload images to S3 execute the following commands:<br>
-
-homer1="$(base64 -i `pwd`/chalicelib/Homer_artwork.png)"<br>
+homer1="$(base64 -i `pwd`/chalicelib/Homer_artwork.png)"<br><br>
 curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer1)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
 
 homer2="$(base64 -i `pwd`/chalicelib/homer_doh.jpg)"<br>
