@@ -51,15 +51,14 @@ Chalice server forwards post/img Post request to post_image() function, reads js
 Fixer.io are free JSON API for current and historical foreign exchange rates. <br>
 The following endpoints use these APIs for currency converter [rates/convert/(currency label)/to/(currency label)/amount/(amount to convert)] <br>
 
-Get all currency rates:<br>
+Get all currency rates. Default base currency is EUR:<br>
 $ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates <br><br>
-Get all currency rates with specified base currency: e.g., USD <br>
-$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/usd <br>
-or for Canada currency: <br>
-$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/cad <br><br>
+Get all currency rates with specified base currency label: (e.g., USD) <br>
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/usd <br><br>
 To convert USD to CAD: <br>
-$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/convert/usd/to/cad/amount/85.50
-
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/convert/usd/to/cad/amount/85.50<br><br>
+You can try any other currency pair from the list.<br>
+$ http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates
 
 
 
