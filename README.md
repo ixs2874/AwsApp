@@ -28,7 +28,7 @@ chalice deploy<br>
 To get server status execute the following command:<br>
 http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/status<br>
 Note: to use http command install httpie, which is part of requirements.txt<br>
-AWS Gateway routs /status endpoint to status() function. Function collects system timestemp, os/platform data and returns it as dictionary.<br><br>
+AWS Gateway routs /status endpoint to status() function. Function collects system timestamp, os/platform data and returns it as dictionary.<br><br>
 2. ---------------------------------------------------------------------------<br>
 This package contains 2 sample images under /chalicelib directory to be uploaded at S3 AWS storage.<br> 
 Default S3 bucket name is 'ixs2874'. To set a different bucket name:<br>
@@ -41,14 +41,16 @@ homer1="$(base64 -i `pwd`/chalicelib/Homer_artwork.png)"<br><br>
 curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer1)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
 
 homer2="$(base64 -i `pwd`/chalicelib/homer_doh.jpg)"<br>
-curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer2)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
+curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "jpg", "data": "'"$(echo $homer2)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
 <h4>Description of image upload</h4>
 <p>
 base64 command encodes an image into stream and assigns it variable "homerX".<br>
 curl posts "homerX" image to "post/img" endpoint on AWS Lambda service and returns URL of the image on S3.<br>
-Chalice server forwards post/img Post request to post_image() function, reads json payload, decodes image, uses ImageMagick convert command and pubprocess.Popen function to creat thumbnail img, then thumbnail is uploaded to S3 ixs2874 bucket and URL is returned.<br>
+Chalice server forwards post/img Post request to post_image() function, reads json payload, decodes image, uses ImageMagick "convert" command and pubprocess.Popen function to create thumbnail img, then thumbnail is uploaded to S3 bucket and URL is returned.<br>
 </p>
 3. --------------------------------------------------------------------------<br>
+The following endpoints use Fixer.io APIs for currency conversion. These are free JSON API for current and historical foreign exchange rates.
+
 Get all currency rates:<br>
 http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates <br><br>
 Get all currency rates with specified base currency: e.g., USD <br>
