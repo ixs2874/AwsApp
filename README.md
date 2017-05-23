@@ -31,6 +31,11 @@ Note: to use http command install httpie, which is part of requirements.txt<br>
 AWS Gateway routs /status endpoint to status() function. Function collects system timestemp, os/platform data and returns it as dictionary.<br><br>
 2. ---------------------------------------------------------------------------<br>
 This package contains 2 sample images under /chalicelib directory to be uploaded at S3 AWS storage.<br> 
+Default S3 bucket name is 'ixs2874'. To set a different bucket name:<br>
+http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/set/bucket/<your bucket name> <br>
+To verify: <br>
+http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/get/bucket
+
 Steps to upload images to S3 execute the following commands:<br>
 homer1="$(base64 -i `pwd`/chalicelib/Homer_artwork.png)"<br><br>
 curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer1)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
@@ -44,6 +49,17 @@ curl posts "homerX" image to "post/img" endpoint on AWS Lambda service and retur
 Chalice server forwards post/img Post request to post_image() function, reads json payload, decodes image, uses ImageMagick convert command and pubprocess.Popen function to creat thumbnail img, then thumbnail is uploaded to S3 ixs2874 bucket and URL is returned.<br>
 </p>
 3. --------------------------------------------------------------------------<br>
-Get Currency rates:
+Get all currency rates:<br>
+http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates <br><br>
+Get all currency rates with specified base currency: e.g., USD <br>
+http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/usd <br>
+or for Canada currency: <br>
+http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/cad <br><br>
+To convert USD to CAD: <br>
+http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/rates/convert/usd/to/cad/ammount/85.50
+
+
+
+
 
 
