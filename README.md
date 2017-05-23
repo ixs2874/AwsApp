@@ -35,7 +35,7 @@ To allow public access to the images add the following code to your AWS S3 "Buck
             "Resource": "arn:aws:s3:::YOUR S3 BUCKET NAME HERE/*"
         }
     ]
-}<br>
+}<br><br>
 Note: without adding the above policy S3 upload will fail with a security error. This is because ACL='public-read' parameter in S3.put_object function. If this parameter is removed, no error will be observed, but URL of the image will not be publicly accessible.<br>
 </p>
 
