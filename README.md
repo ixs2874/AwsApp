@@ -16,7 +16,7 @@ git clone https://github.com/ixs2874/AwsApp <br>
 mkdir ~/.aws<br>
 mv ./config ~/.aws/<br>
 python -m venv venv<br>
-. ./venv/bin/activate<br>
+source ./venv/bin/activate<br>
 pip install -r requirements.txt<br>
 chalice deploy<br>
 </p>
