@@ -22,12 +22,12 @@ chalice deploy<br>
 </p>
 
 <h2> Service Methods</h2>
-1. -------------------------------------------------------------------
+1. --------------------------------------------------------------------------<br>
 To get server status execute the following command:<br>
 http https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/status<br>
 Note: to use http command install httpie, which is part of requirements.txt<br>
 AWS Gateway routs /status endpoint to status() function. Function collects system timestemp, os/platform data and returns it as dictionary.<br><br>
-2. --------------------------------------------------------------------
+2. ---------------------------------------------------------------------------<br>
 This package contains 2 sample images under /chalicelib directory to be uploaded at S3 AWS storage.<br> 
 Steps to upload images to S3 execute the following commands:<br>
 
@@ -36,7 +36,7 @@ curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 1
 
 homer2="$(base64 -i `pwd`/chalicelib/homer_doh.jpg)"<br>
 curl -X POST -H "Content-Type: application/json" -d '{ "width": 128, "height": 128, "format": "PNG", "data": "'"$(echo $homer2)"'"}' https://i04vs3m4ch.execute-api.us-east-1.amazonaws.com/dev/post/img<br><br>
-<h3>Description for image uploade service</h3>
+<h4>Description for image uploade service</h4>
 <p>
 base64 command encodes an image into stream and assigns it variable "homerX".<br>
 curl posts "homerX" image to "post/img" endpoint on AWS Lambda service and returns URL of the image on S3.<br>
